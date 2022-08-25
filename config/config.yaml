@@ -1,6 +1,14 @@
 #数据库配置
 db:
-  name: go_project
+  name: project
   addr: 106.55.3.69:3306
   username: root
   password: xyc970428
+# 服务基本配置
+server:
+  addr: 0.0.0.0:8669
+  port: 8669
+  jwtSecret: MARKET.MONITOR.SECRET
+  useMultipoint: false
+  readTimeout: 60
+  writeTimeout: 60
