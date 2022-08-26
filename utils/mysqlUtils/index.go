@@ -37,3 +37,6 @@ func (db *Database) Init() {
 		toolBoxDB: database,
 	}
 }
+func GetDB() *gorm.DB {
+	return DB.toolBoxDB
+}
