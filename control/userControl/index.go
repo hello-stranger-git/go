@@ -52,3 +52,8 @@ func Register(ctx *gin.Context) {
 		return
 	}
 }
+
+// 获取用户信息
+func GetUserInfo(ctx *gin.Context) {
+	fmt.Println("获取用户信息")
+}
