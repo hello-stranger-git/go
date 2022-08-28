@@ -1,6 +1,7 @@
 package usercontr
 
 import (
+	"fmt"
 	userservice "go_project/services/userService"
 	requestuserstructs "go_project/structs/request/requestUserStructs"
 
@@ -9,7 +10,25 @@ import (
 
 // 登陆
 func Login(ctx *gin.Context) {
-
+	req := new(requestuserstructs.Login)
+	err := ctx.ShouldBindJSON(req)
+	if err != nil {
+		ctx.JSON(422, map[string]interface{}{
+			"errCode": -1,
+			"msg":     "请求参数错误",
+			"format":  1,
+		})
+	}
+	err = userservice.UserServiceInit(ctx).Login(*req, ctx)
+	fmt.Print(err)
+	if err != nil {
+		ctx.JSON(422, map[string]interface{}{
+			"errCode": -1,
+			"msg":     err.Error(),
+			"format":  1,
+		})
+		return
+	}
 }
 
 // 注册
@@ -27,7 +46,7 @@ func Register(ctx *gin.Context) {
 	if err != nil {
 		ctx.JSON(422, map[string]interface{}{
 			"errCode": -1,
-			"msg":     err,
+			"msg":     err.Error(),
 			"format":  1,
 		})
 		return

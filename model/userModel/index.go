@@ -23,15 +23,21 @@ type DB struct {
 	db *gorm.DB
 }
 
-//初始化数据库链接
+// 初始化数据库链接
 func GetUserModel() *DB {
 	database := mysqlutils.GetDB()
 	database.Table("user_infos").Model(&UserInfos{})
 	return &DB{db: database}
 }
 
-//注册
+// 注册
 func (db *DB) Register(data *UserInfos) (*UserInfos, error) {
 	err := db.db.Create(&data).Error
+	return data, err
+}
+
+// 登陆
+func (db *DB) Login(username string) (data *UserInfos, err error) {
+	err = db.db.Where("username = ?", username).Find(&data).Error
 	return data, err
 }

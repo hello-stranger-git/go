@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/Gre-Z/common v0.0.0-20191024025434-2dbc6bd196f9 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.8.1 // indirect
