@@ -14,5 +14,5 @@ func BaseRouter(router *gin.RouterGroup) {
 	router.POST("/regist", usercontrol.Register)
 	//获取用户信息
 
-	router.GET("/getUserInfo", middlewares.JWTAuth(), usercontrol.GetUserInfo)
+	router.GET("/getUserInfoById", middlewares.JWTAuth(), usercontrol.GetUserInfoById)
 }

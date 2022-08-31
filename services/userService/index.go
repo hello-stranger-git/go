@@ -2,6 +2,7 @@ package userservice
 
 import (
 	"errors"
+	responsemodel "go_project/model/responseModel"
 	usermodel "go_project/model/userModel"
 	requestuserstructs "go_project/structs/request/requestUserStructs"
 	responseuserstructs "go_project/structs/response/responseUserStructs"
@@ -50,4 +51,13 @@ func (userServiceClass *userServiceClass) Login(req requestuserstructs.Login, ct
 	}
 	jwt.CreateToken(userInfo, data, ctx)
 	return nil
+}
+
+//根据id查询用户
+func (userServiceClass *userServiceClass) GetUserInfoById(req requestuserstructs.UserInfo) (*responsemodel.UserInfo, error) {
+	userInfo, err := usermodel.GetUserModel().SetId(req.ID).GetUserInfoById()
+	if err != nil {
+		return nil, errors.New("用户信息查询失败")
+	}
+	return userInfo, nil
 }

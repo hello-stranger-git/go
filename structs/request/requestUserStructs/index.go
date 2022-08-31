@@ -17,3 +17,9 @@ type Login struct {
 	UserName string `form:"username" json:"username" binding:"required"`
 	PassWord string `form:"password" json:"password" binding:"required"`
 }
+
+// 接收前端获取用户信息数据模型
+type UserInfo struct {
+	gorm.Model
+	// UserName string `json:"username"`
+}

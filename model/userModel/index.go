@@ -1,6 +1,7 @@
 package usermodel
 
 import (
+	responsemodel "go_project/model/responseModel"
 	mysqlutils "go_project/utils/mysqlUtils"
 
 	"github.com/Gre-Z/common/jtime"
@@ -39,5 +40,17 @@ func (db *DB) Register(data *UserInfos) (*UserInfos, error) {
 // 登陆
 func (db *DB) Login(username string) (data *UserInfos, err error) {
 	err = db.db.Where("username = ?", username).Find(&data).Error
+	return data, err
+}
+
+//设置用户ID
+func (db *DB) SetId(id uint) *DB {
+	db.db = db.db.Where("id = ?", id)
+	return db
+}
+
+//根据id查询用户
+func (db *DB) GetUserInfoById() (data *responsemodel.UserInfo, err error) {
+	err = db.db.First(&data).Error
 	return data, err
 }

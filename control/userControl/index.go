@@ -53,7 +53,33 @@ func Register(ctx *gin.Context) {
 	}
 }
 
-// 获取用户信息
-func GetUserInfo(ctx *gin.Context) {
-	fmt.Println("获取用户信息")
+//根据id查询用户
+func GetUserInfoById(ctx *gin.Context) {
+	req := new(requestuserstructs.UserInfo)
+	err := ctx.ShouldBindJSON(req)
+	if err != nil {
+		ctx.JSON(422, map[string]interface{}{
+			"errCode": -1,
+			"msg":     "请求参数错误",
+			"format":  1,
+		})
+		return
+	}
+	data, err := userservice.UserServiceInit(ctx).GetUserInfoById(*req)
+	if err != nil {
+
+		ctx.JSON(422, map[string]interface{}{
+			"errCode": -1,
+			"msg":     err.Error(),
+			"format":  1,
+		})
+		return
+	}
+	ctx.JSON(200, map[string]interface{}{
+		"errCode": 0,
+		"msg":     "获取成功",
+		"data":    data,
+		"format":  1,
+	})
+
 }
