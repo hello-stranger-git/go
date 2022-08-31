@@ -19,7 +19,7 @@ func Login(ctx *gin.Context) {
 			"format":  1,
 		})
 	}
-	err = userservice.UserServiceInit(ctx).Login(*req, ctx)
+	err = userservice.UserServiceInit(ctx).Login(*req)
 	fmt.Print(err)
 	if err != nil {
 		ctx.JSON(422, map[string]interface{}{
@@ -81,5 +81,4 @@ func GetUserInfoById(ctx *gin.Context) {
 		"data":    data,
 		"format":  1,
 	})
-
 }

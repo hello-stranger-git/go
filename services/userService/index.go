@@ -34,7 +34,7 @@ func (userServiceClass *userServiceClass) Register(req requestuserstructs.Regist
 }
 
 // 登陆
-func (userServiceClass *userServiceClass) Login(req requestuserstructs.Login, ctx *gin.Context) error {
+func (userServiceClass *userServiceClass) Login(req requestuserstructs.Login) error {
 	userModelConnect := usermodel.GetUserModel()
 	userInfo, err := userModelConnect.Login(req.UserName)
 	if err != nil {
@@ -49,7 +49,7 @@ func (userServiceClass *userServiceClass) Login(req requestuserstructs.Login, ct
 		Phone:    userInfo.Phone,
 		Username: userInfo.UserName,
 	}
-	jwt.CreateToken(userInfo, data, ctx)
+	jwt.CreateToken(userInfo, data, userServiceClass.ctx)
 	return nil
 }
 
